@@ -1,0 +1,480 @@
+/* ==================== CONFIG ==================== */
+
+:root{
+--bg:#0f0f0f;
+--bg2:#1a1a1a;
+--gold:#C6A75E;
+--gold-light:#e6c67c;
+--white:#fff;
+--gray:#aaa;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+
+body{
+font-family:'Montserrat',sans-serif;
+background:var(--bg);
+color:var(--white);
+}
+
+/* ==================== HEADER ==================== */
+
+header{
+position:fixed;
+width:100%;
+top:0;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,.85);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+
+.logo{
+font-family:'Cinzel';
+color:var(--gold);
+font-size:22px;
+}
+
+nav a{
+color:white;
+margin-left:25px;
+text-decoration:none;
+font-size:14px;
+}
+
+nav a:hover{color:var(--gold);}
+
+/* ==================== HERO ==================== */
+
+.hero{
+height:100vh;
+background:url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+position:relative;
+}
+
+.hero::after{
+content:'';
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.95));
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:800px;
+animation:fadeUp 1.5s ease;
+}
+
+.hero h1{
+font-family:'Cinzel';
+font-size:60px;
+margin-bottom:20px;
+}
+
+.hero p{
+color:var(--gray);
+margin-bottom:30px;
+}
+
+.btn{
+padding:15px 35px;
+border:none;
+cursor:pointer;
+font-weight:600;
+transition:.4s;
+}
+
+.btn-gold{
+background:linear-gradient(45deg,var(--gold),var(--gold-light));
+color:#000;
+}
+
+.btn-gold:hover{
+transform:translateY(-5px);
+box-shadow:0 15px 35px rgba(198,167,94,.4);
+}
+
+/* ==================== SERVICES ==================== */
+
+section{
+padding:100px 8%;
+}
+
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+margin-top:50px;
+}
+
+.card{
+background:var(--bg2);
+padding:30px;
+border:1px solid transparent;
+transition:.4s;
+}
+
+.card:hover{
+border:1px solid var(--gold);
+transform:translateY(-5px);
+}
+
+.price{
+color:var(--gold);
+margin-top:10px;
+font-weight:bold;
+}
+
+/* ================= GALERIA ================= */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+max-width:1200px;
+margin:50px auto;
+padding:0 20px;
+}
+
+.gallery-item{
+position:relative;
+overflow:hidden;
+border-radius:14px;
+box-shadow:0 8px 20px rgba(0,0,0,0.35);
+transition:transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gallery-item img{
+width:100%;
+height:260px;
+object-fit:cover;
+display:block;
+transition:transform 0.4s ease;
+}
+
+/* efeito ao passar o mouse */
+
+.gallery-item:hover{
+transform:translateY(-6px);
+box-shadow:0 15px 35px rgba(0,0,0,0.5);
+}
+
+.gallery-item:hover img{
+transform:scale(1.05);
+}
+
+#galeria h2{
+margin-top:80px;
+margin-bottom:10px;
+font-size:32px;
+}
+
+/* ==================== ADMIN ==================== */
+
+.admin{
+display:none;
+padding:120px 8%;
+background:#111;
+min-height:100vh;
+}
+
+.admin input{
+padding:12px;
+margin:5px 0;
+width:100%;
+background:#222;
+color:white;
+border:none;
+}
+
+.admin-list{
+margin-top:30px;
+}
+
+.admin-item{
+background:#222;
+padding:15px;
+margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+/* ================= TABELA BARBEIRO ================= */
+
+#barbeiroTable{
+width:100%;
+border-collapse:collapse;
+min-width:600px;
+}
+
+#barbeiroTable th,
+#barbeiroTable td{
+padding:10px;
+font-size:14px;
+}
+
+#barbeiro{
+max-width:100%;
+overflow-x:auto;
+}
+
+/* ================= CALENDÁRIO ================= */
+
+#calendario{
+max-width:400px;
+width:100%;
+margin:20px auto;
+background:rgba(255,255,255,0.05);
+border-radius:15px;
+padding:20px;
+backdrop-filter:blur(10px);
+box-sizing:border-box;
+}
+
+/* header */
+
+.cal-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+font-weight:bold;
+}
+
+/* grade */
+
+.cal-grid{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:8px;
+width:100%;
+}
+
+/* dias */
+
+.cal-dia{
+aspect-ratio:1/1; /* mantém quadrado */
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:clamp(12px,2.5vw,16px);
+
+cursor:pointer;
+border-radius:8px;
+transition:.3s;
+}
+
+/* hover */
+
+.cal-dia:hover{
+background:rgba(198,167,94,0.3);
+}
+
+/* selecionado */
+
+.cal-selecionado{
+background:var(--gold);
+color:black;
+}
+
+/* bloqueado */
+
+.cal-bloqueado{
+background:#6b1c1c;
+color:#fff;
+cursor:not-allowed;
+}
+/* ================= AGENDAMENTO BOX ================= */
+
+.agendamento-box{
+max-width:500px;
+margin:50px auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+
+padding:40px;
+
+/* efeito vidro */
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+
+/* borda */
+border:1px solid rgba(255,255,255,0.1);
+
+/* borda arredondada */
+border-radius:15px;
+
+/* sombra */
+box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* inputs dentro da caixa */
+
+.agendamento-box input,
+.agendamento-box select{
+padding:12px;
+background:#222;
+border:none;
+color:white;
+border-radius:8px;
+}
+
+.agendamento-box input:focus,
+.agendamento-box select:focus{
+outline:none;
+border:1px solid var(--gold);
+}
+
+/* ==================== FOOTER ==================== */
+
+footer{
+background:#000;
+padding:60px 8%;
+margin-top:80px;
+}
+
+.footer-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;
+}
+
+.footer-container h3{
+font-family:'Cinzel';
+color:var(--gold);
+margin-bottom:15px;
+}
+
+.footer-container p,
+.footer-container a{
+color:var(--gray);
+font-size:14px;
+text-decoration:none;
+display:block;
+margin-bottom:8px;
+}
+
+.footer-container a:hover{
+color:var(--gold);
+}
+
+.footer-bottom{
+text-align:center;
+margin-top:40px;
+border-top:1px solid #222;
+padding-top:20px;
+font-size:13px;
+color:#777;
+}
+
+/* ================= MOBILE RESPONSIVO ================= */
+
+@media (max-width:600px){
+
+/* HEADER */
+
+header{
+padding:12px 5%;
+flex-direction:column;
+gap:10px;
+text-align:center;
+}
+
+nav{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+}
+
+nav a{
+margin:0;
+font-size:13px;
+}
+
+/* HERO */
+
+.hero h1{
+font-size:34px;
+}
+
+.hero p{
+font-size:14px;
+padding:0 10px;
+}
+
+/* CAIXA DE AGENDAMENTO */
+
+.agendamento-box{
+width:90%;
+padding:25px;
+}
+
+/* INPUTS */
+
+.agendamento-box input,
+.agendamento-box select{
+font-size:14px;
+padding:10px;
+}
+
+/* CALENDÁRIO */
+
+#calendario{
+width:100%;
+max-width:100%;
+padding:15px;
+}
+
+.cal-grid{
+gap:5px;
+}
+
+.cal-dia{
+font-size:14px;
+}
+
+/* GALERIA */
+
+.gallery{
+grid-template-columns:1fr;
+}
+
+/* TABELA DO BARBEIRO */
+
+#barbeiroTable{
+min-width:500px;
+}
+
+}
+
+/* ================= TELAS MUITO PEQUENAS ================= */
+
+@media (max-width:400px){
+
+.cal-dia{
+font-size:12px;
+}
+
+.hero h1{
+font-size:28px;
+}
+
+.btn{
+padding:12px 25px;
+font-size:13px;
+}
+
+}

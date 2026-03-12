@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel da Barbearia</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./styles/style.css">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="logo">
+✂ Painel Barbearia
+</div>
+
+<nav>
+
+<a href="#dashboard">Dashboard</a>
+<a href="#info">Informações</a>
+<a href="#servicos">Serviços</a>
+<a href="#galeria">Galeria</a>
+<a href="#horarios">Horários</a>
+<a href="#agendamentos">Agendamentos</a>
+
+</nav>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+
+<h1>Painel Administrativo</h1>
+
+<button class="btn" id="logout">Sair</button>
+
+</header>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard">
+
+<h2>Resumo</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Agendamentos Hoje</h3>
+<p id="agHoje">0</p>
+</div>
+
+<div class="card">
+<h3>Serviços</h3>
+<p id="totalServicos">0</p>
+</div>
+
+<div class="card">
+<h3>Fotos na Galeria</h3>
+<p id="totalFotos">0</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- INFORMAÇÕES -->
+
+<section id="info">
+
+<h2>Informações da Barbearia</h2>
+
+<div class="form-grid">
+
+<input id="nome" placeholder="Nome da Barbearia">
+
+<input id="telefone" placeholder="Telefone">
+
+<input id="whatsapp" placeholder="WhatsApp">
+
+<input id="endereco" placeholder="Endereço">
+
+<input id="instagram" placeholder="Instagram">
+
+<input id="facebook" placeholder="Facebook">
+
+</div>
+
+<button class="btn-gold" id="salvarInfo">Salvar Informações</button>
+
+</section>
+
+
+<!-- SERVIÇOS -->
+
+<section id="servicos">
+
+<h2>Serviços</h2>
+
+<div class="form-grid">
+
+<input id="servicoNome" placeholder="Nome do Serviço">
+<input id="servicoDesc" placeholder="Descrição">
+<input id="servicoPreco" placeholder="Preço">
+
+</div>
+
+<button class="btn-gold" id="addServico">Adicionar Serviço</button>
+
+<div class="list" id="listaServicos"></div>
+
+</section>
+
+
+<!-- GALERIA -->
+
+<section id="galeria">
+
+<h2>Galeria</h2>
+
+<div class="form-grid">
+
+<input placeholder="URL da Foto">
+
+<button class="btn-gold">Adicionar Foto</button>
+
+</div>
+
+<div class="gallery-admin"></div>
+
+</section>
+
+
+<!-- HORÁRIOS -->
+
+<section id="horarios">
+
+<h2>Horários Disponíveis</h2>
+
+<div class="form-grid">
+
+<input type="time">
+
+<button class="btn-gold">Adicionar</button>
+
+</div>
+
+<div class="list"></div>
+
+</section>
+
+
+<!-- AGENDAMENTOS -->
+
+<section id="agendamentos">
+
+<h2>Agendamentos</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Data</th>
+<th>Hora</th>
+<th>Cliente</th>
+<th>Telefone</th>
+<th>Serviço</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
+</section>
+
+
+</main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./scripts/admin_script.js"></script>
+
+</body>
+
+</html>

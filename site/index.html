@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Barbearia no Bairro X especializada em cortes modernos, barba e atendimento premium. Agende pelo WhatsApp.">
+    <meta name="keywords" content="barbearia Bairro X, corte masculino Bairro X, barbeiro Bairro X">
+    <meta name="author" content="Desenvolvido por XarTins.LTDA">
+
+    <title>Barbearia Premium | Luxo e Precisão</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+<header>
+    <div class="logo">✂ Barbearia Premium</div>
+    <nav>
+    <a href="#">Início</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#galeria">Galeria</a>
+    <a href="../admin/index.html" target="_blank">Admin</a>
+    </nav>
+</header>
+
+<section class="hero">
+        <div class="hero-content">
+        <h1>Seu Estilo Começa Aqui.</h1>
+        <p>Experiência premium, precisão e transformação de imagem.</p>
+        <button class="btn btn-gold" onclick="agendar()">Agendar pelo WhatsApp</button>
+    </div>
+</section>
+
+<section id="servicos">
+    <h2 style="text-align:center;font-family:'Cinzel';">Nossos Serviços</h2>
+    <div class="services" id="servicesContainer"></div>
+</section>
+
+<!-- ================= AGENDAMENTO ================= -->
+
+<section id="agendamento">
+  <h2 style="text-align:center;font-family:'Cinzel';">Agende Seu Horário</h2>
+
+  <div class="agendamento-box">
+
+    <input type="text" id="clienteNome" placeholder="Seu Nome">
+    <input type="text" id="clienteTelefone" placeholder="Seu Telefone">
+
+    <select id="servicoSelect"></select>
+
+    <div id="calendario"></div>
+    <input type="hidden" id="dataSelect">
+
+    <select id="horarioSelect">
+      <option value="">Selecione uma data primeiro</option>
+    </select>
+
+    <button class="btn btn-gold" onclick="confirmarAgendamento()">
+      Confirmar Agendamento
+    </button>
+
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+    <h2 style="text-align:center;font-family:'Cinzel';">Nossa Galeria</h2>
+        <div class="gallery">
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517832606294-7e0a09e6cc2d?auto=format&fit=crop&w=800&q=80"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=800&q=80"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=80"></div>
+    </div>
+</section>
+
+<!-- ================= ADMIN ================= -->
+
+<section class="admin" id="admin">
+    <h2 style="font-family:'Cinzel';margin-bottom:30px;">Painel Administrativo</h2>
+
+    <div id="loginArea">
+        <input type="password" id="adminSenha" placeholder="Digite a senha de administrador">
+        <button class="btn btn-gold" onclick="loginAdmin()">Entrar</button>
+    </div>
+
+    <div id="adminArea" style="display:none;">
+        <h3 style="margin:30px 0 15px;">Adicionar / Editar Serviço</h3>
+
+        <input type="text" id="serviceName" placeholder="Nome do Serviço">
+        <input type="text" id="serviceDesc" placeholder="Descrição">
+        <input type="text" id="servicePrice" placeholder="Preço (Ex: R$60)">
+        <button class="btn btn-gold" onclick="salvarServico()">Salvar Serviço</button>
+
+        <h2>Horários Disponíveis</h2>
+        <div style="display:flex;gap:10px;margin-bottom:10px;">
+            <input type="time" id="novoHorario">
+            <button class="btn" onclick="adicionarHorario()">Adicionar</button>
+        </div>
+        <div id="listaHorarios"></div>
+        <h2 style="margin-top:40px;">Bloquear Dia</h2>
+
+        <div style="display:flex;gap:10px;margin-bottom:10px;">
+            <input type="date" id="diaBloqueado">
+            <button class="btn" onclick="bloquearDia()">Bloquear</button>
+        </div>
+
+        <!-- ================= BARBEIRO ================= -->
+<section id="barbeiro">
+  <h2 style="text-align:center;font-family:'Cinzel';">Agendamentos do Barbeiro</h2>
+  <div style="max-width:600px;margin:50px auto;">
+    <table id="barbeiroTable" style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="background:#111;color:#fff;">
+          <th>Data</th>
+          <th>Horário</th>
+          <th>Cliente</th>
+          <th>Telefone</th>
+          <th>Serviço</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<div id="listaDiasBloqueados"></div>
+        <h2 style="margin-top:40px;">Agendamentos</h2>
+        <div id="appointmentsTable"></div>
+    <div class="admin-list" id="adminList"></div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+    <div>
+        <h3>Barbearia Premium</h3>
+        <p>Excelência, tradição e precisão em cada detalhe.</p>
+    </div>
+    <div>
+        <h3>Contato</h3>
+        <p>Rua Exemplo, 123 - São Paulo - Brasil</p>
+        <p>(11) 99999-9999</p>
+        <p>Seg-Sáb: 09h às 20h</p>
+    </div>
+    <div>
+        <h3>Redes Sociais</h3>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+    </div>
+</div>
+
+    <div class="footer-bottom">
+        © <span id="ano"></span> Barbearia Modelo Premium. Todos os direitos reservados.
+            <br><br>        
+            Desenvolvido por 
+        <a href="http://xartinsltda.com.br/" target="_blank" style="color: var(--gold); text-decoration: none; font-weight: 600;">
+            XarTins.LTDA
+        </a> — Soluções Digitais para Negócios Locais
+    </div>
+</footer>
+
+<script type="module" src="./scripts/script.js"></script>
+</body>
+</html>
