@@ -90,15 +90,15 @@
 
 <input id="nome" placeholder="Nome da Barbearia">
 
-<input id="telefone" placeholder="Telefone">
+<input id="telefone" placeholder="Telefone (5516999999999)">
 
-<input id="whatsapp" placeholder="WhatsApp">
+<input id="whatsapp" placeholder="WhatsApp (5516999999999)">
 
-<input id="endereco" placeholder="Endereço">
+<input id="endereco" placeholder="Endereço (Av. Leopoldina nº123)">
 
-<input id="instagram" placeholder="Instagram">
+<input id="instagram" placeholder="Instagram (barbearia0102)">
 
-<input id="facebook" placeholder="Facebook">
+<input id="facebook" placeholder="Facebook (barbearia0102)">
 
 </div>
 
@@ -123,7 +123,13 @@
 
 <button class="btn-gold" id="addServico">Adicionar Serviço</button>
 
-<div class="list" id="listaServicos"></div>
+<section class="admin-servicos">
+
+<h2>Serviços Cadastrados</h2>
+
+<div id="listaServicos"></div>
+
+</section>
 
 </section>
 
@@ -136,7 +142,7 @@
 
 <div class="form-grid">
 
-<input placeholder="URL da Foto">
+<input type="file" id="inputFoto" multiple>
 
 <button class="btn-gold">Adicionar Foto</button>
 
@@ -182,6 +188,7 @@
 <th>Cliente</th>
 <th>Telefone</th>
 <th>Serviço</th>
+<th>Ações</th>
 </tr>
 
 </thead>

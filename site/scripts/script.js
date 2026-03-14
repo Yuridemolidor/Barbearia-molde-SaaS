@@ -1,7 +1,7 @@
 import { CONFIG } from "../config/config.js";
 import { db } from "./supabase.js";
 
-const numeroWhats = CONFIG.numeroWhats;
+let barbearia = {};
 const senhaAdmin = CONFIG.senhaAdmin;
 
 let horariosDisponiveis = [];
@@ -17,12 +17,19 @@ const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
 /* ================= WHATS ================= */
 
 function agendar(){
-let msg = `Olá, gostaria de agendar um horário na ${CONFIG.nomeBarbearia}.`;
+
+if(!barbearia.whatsapp){
+alert("WhatsApp não configurado");
+return;
+}
+
+let msg = `Olá, gostaria de agendar um horário na ${barbearia.nome}.`;
 
 window.open(
-`https://wa.me/${CONFIG.numeroWhats}?text=${encodeURIComponent(msg)}`,
+`https://wa.me/${barbearia.whatsapp}?text=${encodeURIComponent(msg)}`,
 "_blank"
 );
+
 }
 
 /* ================= ADMIN ================= */
@@ -57,6 +64,50 @@ function logoutAdmin(){
 document.getElementById("loginArea").style.display="block";
 document.getElementById("adminArea").style.display="none";
 document.getElementById("adminSenha").value="";
+}
+
+const BARBERSHOP_ID = "7ba3db5b-320e-490b-b065-c4737fa55db2";
+
+async function carregarBarbearia(){
+
+const { data, error } = await db
+.from("barbershops")
+.select("*")
+.eq("id", BARBERSHOP_ID)
+.single();
+
+if(error){
+console.error("Erro ao carregar barbearia:", error);
+return;
+}
+
+barbearia = data;
+
+/* TEXTOS */
+
+document.getElementById("nomeBarbearia").innerText = "✂ " + (data.nome || "");
+document.getElementById("footerNome").innerText = data.nome || "";
+document.getElementById("footerEndereco").innerText = data.endereco || "";
+document.getElementById("footerTelefone").innerText = data.telefone || "";
+
+/* REDES SOCIAIS */
+
+const insta = document.getElementById("linkInstagram");
+const face = document.getElementById("linkFacebook");
+const whats = document.getElementById("linkWhatsApp");
+
+if(insta && data.instagram){
+insta.href = `https://instagram.com/${data.instagram}`
+}
+
+if(face && data.facebook){
+face.href = `https://facebook.com/${data.facebook}`
+}
+
+if(whats && data.whatsapp){
+whats.href = `https://wa.me/${data.whatsapp}`;
+}
+
 }
 
 /* ================= SERVIÇOS ================= */
@@ -217,7 +268,9 @@ await fetchServices();
 await fetchHorarios();
 await fetchDiasBloqueados();
 await fetchAppointmentsBarbeiro();
-gerarCalendario();
+await gerarCalendario();
+await carregarGaleria();
+await carregarBarbearia();
 
 let sairBtn = document.createElement("button");
 sairBtn.textContent = "Sair do Painel";
@@ -231,6 +284,7 @@ document.getElementById("adminArea").appendChild(sairBtn);
 document.getElementById("ano").textContent = CONFIG.anoCriacao;
 
 /* ================= AGENDAMENTO ================= */
+
 
 /* ================= HORÁRIOS DINÂMICOS ================= */
 
@@ -504,9 +558,19 @@ grid.innerHTML += "<div></div>";
 
 for(let d=1; d<=totalDias; d++){
 
-let data = new Date(ano,mes,d).toISOString().split("T")[0];
+let dataObj = new Date(ano, mes, d);
+let data = dataObj.toISOString().split("T")[0];
 
-let bloqueado = diasBloqueados.includes(data);
+let hoje = new Date();
+hoje.setHours(0,0,0,0);
+
+/* BLOQUEAR DIAS PASSADOS */
+
+let passado = dataObj < hoje;
+
+/* BLOQUEIOS */
+
+let bloqueado = diasBloqueados.includes(data) || passado;
 
 grid.innerHTML += `
 <div class="cal-dia ${bloqueado ? "cal-bloqueado":""}"
@@ -676,6 +740,38 @@ await db
 
 fetchDiasBloqueados();
 renderDiasBloqueados();
+}
+
+async function carregarGaleria(){
+
+const { data, error } = await db
+.from("gallery")
+.select("*")
+.order("id", { ascending: false });
+
+if(error){
+console.error("Erro ao carregar galeria:", error);
+return;
+}
+
+const container = document.querySelector(".gallery");
+
+if(!container) return;
+
+container.innerHTML = "";
+
+data.forEach(foto => {
+
+if(!foto.image_url) return;
+
+container.innerHTML += `
+<div class="gallery-item">
+<img src="${foto.image_url}">
+</div>
+`;
+
+});
+
 }
 
 /* ===== EVENTO AO MUDAR DATA ===== */
