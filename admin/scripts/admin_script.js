@@ -463,7 +463,7 @@ await db
 }
 
 document.getElementById("logout").onclick = () => {
-window.location.href = "../site/index.html"
+window.location.href = "../index.html"
 }
 
 function formatarData(data){
