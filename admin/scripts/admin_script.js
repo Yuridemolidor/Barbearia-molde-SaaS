@@ -1,15 +1,8 @@
-const SUPABASE_URL = "https://lwtourrhfehhevpixzgf.supabase.co"
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx3dG91cnJoZmVoaGV2cGl4emdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxNjk5MjYsImV4cCI6MjA4Nzc0NTkyNn0.3yDpHC6TZ-nTHdRS6Oq1HNWsMVzyjdGLuEc--tt5aio"
+console.log("SCRIPT CARREGOU")
 
-const db = createClient(
-  CONFIG.SUPABASE_URL,
-  CONFIG.SUPABASE_KEY,
-  {
-    auth: {
-      persistSession: false
-    }
-  }
-)
+import { initDb, getDb } from "./supabase.js"
+
+let db;
 
 const BARBERSHOP_ID = "7ba3db5b-320e-490b-b065-c4737fa55db2"
 
@@ -482,14 +475,30 @@ return `${dia}/${mes}/${ano}`
 
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-limparAgendamentosAntigos()
-
-carregarBarbearia()
-carregarAgendamentos()
-carregarServicos()
-carregarResumo()
-carregarGaleria()
+// Inicializar Supabase primeiro
+try {
+  await initDb()
+  db = getDb()
+  
+  if (!db) {
+    throw new Error("Database não foi inicializado")
+  }
+  
+  console.log("✅ DATABASE PRONTO")
+  
+  // Agora sim, carregar dados
+  limparAgendamentosAntigos()
+  carregarBarbearia()
+  carregarAgendamentos()
+  carregarServicos()
+  carregarResumo()
+  carregarGaleria()
+  
+} catch (error) {
+  console.error("❌ ERRO AO INICIALIZAR:", error)
+  alert("Erro ao conectar com o banco de dados. Recarregue a página.")
+}
 
 })

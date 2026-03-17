@@ -9,11 +9,6 @@ let diasBloqueados = [];
 
 document.title = CONFIG.nomeBarbearia;
 
-/* ================= SUPABASE CONFIG ================= */
-
-const SUPABASE_URL = CONFIG.SUPABASE_URL;
-const SUPABASE_KEY = CONFIG.SUPABASE_KEY;
-
 /* ================= WHATS ================= */
 
 function agendar(){
