@@ -463,7 +463,7 @@ await db
 }
 
 document.getElementById("logout").onclick = () => {
-window.location.href = "../index.html"
+href = "https://yuridemolidor.github.io/Barbearia-molde-SaaS/"
 }
 
 function formatarData(data){
