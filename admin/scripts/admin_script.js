@@ -1,9 +1,14 @@
 const SUPABASE_URL = "https://lwtourrhfehhevpixzgf.supabase.co"
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx3dG91cnJoZmVoaGV2cGl4emdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxNjk5MjYsImV4cCI6MjA4Nzc0NTkyNn0.3yDpHC6TZ-nTHdRS6Oq1HNWsMVzyjdGLuEc--tt5aio"
 
-const db = supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+const db = createClient(
+  CONFIG.SUPABASE_URL,
+  CONFIG.SUPABASE_KEY,
+  {
+    auth: {
+      persistSession: false
+    }
+  }
 )
 
 const BARBERSHOP_ID = "7ba3db5b-320e-490b-b065-c4737fa55db2"
@@ -462,10 +467,9 @@ await db
 
 }
 
-document.getElementById("logout").onclick = () => {
-href = "https://yuridemolidor.github.io/Barbearia-molde-SaaS/"
-}
-
+document.getElementById("logout").addEventListener("click", async () => {
+window.location.href = "https://yuridemolidor.github.io/Barbearia-molde-SaaS/"
+})
 function formatarData(data){
 
 const partes = data.split("-")
