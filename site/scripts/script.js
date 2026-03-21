@@ -790,3 +790,48 @@ window.bloquearDia = bloquearDia;
 window.removerDia = removerDia;
 window.cancelarAgendamento = cancelarAgendamento;
 window.selecionarData = selecionarData;
+
+// ================= BARBER AUTH =================
+function isBarberLoggedIn() {
+  const session = localStorage.getItem('barberSession');
+  if (!session) return false;
+  
+  try {
+    const data = JSON.parse(session);
+    // Check expiry
+    if (Date.now() >= data.expires) {
+      localStorage.removeItem('barberSession');
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function barberLogout() {
+  localStorage.removeItem('barberSession');
+  document.getElementById('barbeiroContent').style.display = 'none';
+  document.querySelector('#barbeiro .btn.btn-gold').style.display = 'block';
+  alert('Logout realizado!');
+}
+
+async function barberLogin() {
+  window.location.href = 'login.html';
+}
+
+function checkBarberAuth() {
+  if (isBarberLoggedIn()) {
+    document.getElementById('barbeiroContent').style.display = 'block';
+    document.querySelector('#barbeiro .btn.btn-gold').style.display = 'none';
+    fetchAppointmentsBarbeiro(); // Reload table
+  }
+}
+
+// Auto-check on load
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.hash === '#barbeiro') {
+    checkBarberAuth();
+    document.getElementById('barbeiro').scrollIntoView({ behavior: 'smooth' });
+  }
+});

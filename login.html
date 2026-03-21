@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Barbeiro - Barbearia Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./site/styles/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo">✂ Login Barbeiro</div>
+            <p>Entre para acessar seus agendamentos</p>
+            
+            <form id="loginForm">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Senha" required>
+                <button type="submit" class="btn btn-gold">Entrar</button>
+            </form>
+            
+            <div class="login-links">
+                <a href="index.html">← Voltar ao site</a>
+                <a href="#" onclick="forgotPassword()">Esqueceu a senha?</a>
+                <br><a href="register.html" style="color: var(--gold);">Não tem conta? Cadastrar barbearia</a>
+            </div>
+            
+            <div class="whatsapp-fallback">
+                <p>Ou agende pelo WhatsApp:</p>
+                <button class="btn" onclick="openWhatsApp()">WhatsApp</button>
+            </div>
+            
+            <div id="loginMessage"></div>
+        </div>
+    </div>
+
+    <script type="module" src="./site/scripts/login.js"></script>
+</body>
+</html>

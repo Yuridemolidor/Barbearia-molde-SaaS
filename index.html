@@ -18,7 +18,7 @@
     <a href="#">Início</a>
     <a href="#servicos">Serviços</a>
     <a href="#galeria">Galeria</a>
-    <a href="./admin.html">Admin</a>
+        <a href="./login.html">Admin</a>
     </nav>
 </header>
 
@@ -99,21 +99,28 @@
         </div>
 
         <!-- ================= BARBEIRO ================= -->
-<section id="barbeiro">
-  <h2 style="text-align:center;font-family:'Cinzel';">Agendamentos do Barbeiro</h2>
-  <div style="max-width:600px;margin:50px auto;">
-    <table id="barbeiroTable" style="width:100%;border-collapse:collapse;">
-      <thead>
-        <tr style="background:#111;color:#fff;">
-          <th>Data</th>
-          <th>Horário</th>
-          <th>Cliente</th>
-          <th>Telefone</th>
-          <th>Serviço</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+<section id="barbeiro" style="display:none;">
+  <div style="text-align:center;padding:40px;background:rgba(255,255,255,0.05);border-radius:15px;margin:20px 0;max-width:600px;margin-left:auto;margin-right:auto;">
+    <button class="btn btn-gold" onclick="barberLogin()" style="margin-bottom:20px;">🔐 Login Barbeiro</button>
+    <p style="color:var(--gray);">Faça login para ver seus agendamentos</p>
+  </div>
+  <div id="barbeiroContent" style="display:none;">
+    <h2 style="text-align:center;font-family:'Cinzel';">Agendamentos do Barbeiro</h2>
+    <button class="btn" onclick="barberLogout()" style="margin-bottom:20px;">Sair</button>
+    <div style="max-width:600px;margin:50px auto;">
+      <table id="barbeiroTable" style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#111;color:#fff;">
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Cliente</th>
+            <th>Telefone</th>
+            <th>Serviço</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 </section>
 

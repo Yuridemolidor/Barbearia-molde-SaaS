@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Barbearia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./site/styles/style.css">
+    <style>
+        .register-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .register-box { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; }
+        .register-box input { margin-bottom: 15px; }
+        .switch-link { text-align: center; margin: 20px 0; color: var(--gold); }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <div class="logo" style="font-family: 'Cinzel'; font-size: 28px; text-align: center; margin-bottom: 10px;">✂ Cadastrar Barbearia</div>
+            <p style="text-align: center; color: var(--gray);">Crie sua conta gratuita</p>
+            
+            <form id="registerForm">
+                <input type="text" id="barbeariaNome" placeholder="Nome da Barbearia" required>
+                <input type="email" id="email" placeholder="Seu Email" required>
+                <input type="password" id="password" placeholder="Senha (mín. 6 chars)" required>
+                <input type="tel" id="telefone" placeholder="Telefone/WhatsApp">
+                <input type="text" id="endereco" placeholder="Endereço (opcional)">
+                
+                <button type="submit" class="btn btn-gold" style="width: 100%; padding: 15px;">Criar Conta</button>
+            </form>
+            
+            <div id="registerMessage"></div>
+            
+            <div class="switch-link">
+                <a href="login.html">← Já tem conta? Fazer login</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./site/scripts/register.js"></script>
+</body>
+</html>
