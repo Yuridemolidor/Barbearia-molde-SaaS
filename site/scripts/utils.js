@@ -1,39 +1,50 @@
-// Multi-tenant utils para SaaS - COMPLETE
-const BARBERSHOP_TABLE = 'barbershops';
+// 🏪 Multi-Tenant Utils - URL → Barbershop ID → Dados isolados
 
-let currentTenantId = localStorage.getItem('tenantId') || null;
-
-function getCurrentTenantId() {
-  return currentTenantId;
+// 1. URL /barbearia-joao → barbershop_id = "joao-xyz"
+export function getCurrentTenantId() {
+  const path = window.location.pathname;
+  const tenantSlug = path.split('/')[1]; // "barbearia-joao"
+  
+  if (!tenantSlug) return 'default'; // fallback
+  return tenantSlug.replace('barbearia-', ''); // "joao"
 }
 
-function setCurrentTenantId(id) {
-  currentTenantId = id;
-  localStorage.setItem('tenantId', id);
+// 2. TODAS queries filtradas
+export async function query(table, opts = {}) {
+  return db
+    .from(table)
+    .select('*')
+    .eq('barbershop_id', getCurrentTenantId())
+    .eq('barbershop_slug', getCurrentTenantSlug()) // extra segurança
+    .match(opts);
 }
 
-function clearTenant() {
-  currentTenantId = null;
-  localStorage.removeItem('tenantId');
+// 3. Carrega dados da barbearia da URL
+export async function loadTenantData() {
+  const tenantId = getCurrentTenantId();
+  const { data } = await db
+    .from('barbershops')
+    .select('*')
+    .eq('slug', tenantId)
+    .single();
+    
+  return data;
 }
 
-// Query helper com tenant filter
-function filterByTenant(query) {
-  if (!currentTenantId) throw new Error('No tenant selected');
-  return query.eq('barbershop_id', currentTenantId);
+// 4. Login tenant-aware
+export function loginWithTenant(email, password, tenantId) {
+  return db.auth.signInWithPassword({
+    email,
+    password,
+    options: {
+      data: { barbershop_id: tenantId }
+    }
+  });
 }
 
-// Supabase RLS helper
-function getRLSPolicy() {
-  return {
-    barbershops: [
-      'CREATE POLICY "Users can only access own barbershop" ON barbershops FOR ALL USING (owner_id = auth.uid())'
-    ],
-    appointments: [
-      'CREATE POLICY "Tenant appointments" ON appointments FOR ALL USING (barbershop_id = (select barbershop_id from profiles where id = auth.uid()))'
-    ]
-  };
-}
+// Usage em qualquer script:
+// await utils.query('appointments')
+// await utils.loadTenantData()
 
-export { getCurrentTenantId, setCurrentTenantId, clearTenant, filterByTenant, getRLSPolicy };
+export { getCurrentTenantId, query, loadTenantData, loginWithTenant };
 
